@@ -7,7 +7,7 @@ const Cart = () => {
 
   return (
     <div className="container">
-      <h2 className="text-center mt-4">Shopping Cart</h2>
+      <h2 className="text-center mt-4 mb-4">Shopping Cart</h2>
       
       {cartItems.length === 0 ? (
         <p className="text-center mt-4">Your cart is empty</p>
@@ -16,8 +16,8 @@ const Cart = () => {
           {cartItems.map(item => (
             <div key={item.id} className="cart-item">
               <div>
-                <h3>{item.title}</h3>
-                <p className="product-price">${item.price}</p>
+                <h3 className="product-title">{item.title}</h3>
+                <p className="product-price">${item.price.toFixed(2)}</p>
               </div>
               <div>
                 <button 
@@ -36,7 +36,7 @@ const Cart = () => {
                 </button>
                 <button 
                   onClick={() => removeFromCart(item.id)}
-                  className="button"
+                  className="button button-secondary ml-2"
                 >
                   Remove
                 </button>
@@ -44,7 +44,7 @@ const Cart = () => {
             </div>
           ))}
           
-          <div className="cart-total">
+          <div className="cart-total mt-4">
             Total: ${total.toFixed(2)}
           </div>
           

@@ -22,8 +22,8 @@ const Login = () => {
   return (
     <div className="container">
       <div style={{ maxWidth: '400px', margin: '2rem auto' }}>
-        <h2 className="text-center">Login</h2>
-        {error && <p style={{ color: 'var(--error-color)' }}>{error}</p>}
+        <h2 className="text-center mb-4">Login</h2>
+        {error && <p style={{ color: 'var(--error-color)', marginBottom: '1rem' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Email</label>
@@ -45,7 +45,7 @@ const Login = () => {
               className="form-input"
             />
           </div>
-          <button type="submit" className="button button-primary">
+          <button type="submit" className="button button-primary" style={{ width: '100%' }}>
             Login
           </button>
         </form>

@@ -24,7 +24,7 @@ const Header = () => {
             {user ? (
               <>
                 <span className="nav-link">{user.name}</span>
-                <button onClick={logout} className="button button-primary">
+                <button onClick={logout} className="button button-secondary">
                   Logout
                 </button>
               </>

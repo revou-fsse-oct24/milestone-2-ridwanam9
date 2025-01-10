@@ -34,12 +34,13 @@ const ProductList = () => {
     ? products?.filter((product: Product) => product.category.name === selectedCategory)
     : products;
 
-  if (isLoading) return <div className="text-center">Loading...</div>;
-  if (error) return <div className="text-center">Error fetching products</div>;
+  if (isLoading) return <div className="container text-center mt-4">Loading...</div>;
+  if (error) return <div className="container text-center mt-4">Error fetching products</div>;
 
   return (
     <div className="container">
-      <div className="mt-4">
+      <h2 className="text-center mt-4 mb-4">Our Products</h2>
+      <div className="mb-4">
         <select 
           value={selectedCategory} 
           onChange={(e) => setSelectedCategory(e.target.value)}
@@ -62,7 +63,7 @@ const ProductList = () => {
             />
             <div className="product-info">
               <h3 className="product-title">{product.title}</h3>
-              <p className="product-price">${product.price}</p>
+              <p className="product-price">${product.price.toFixed(2)}</p>
               <Link 
                 to={`/products/${product.id}`} 
                 className="button button-primary mt-2"
