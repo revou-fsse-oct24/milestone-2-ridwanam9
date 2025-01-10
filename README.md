@@ -36,7 +36,7 @@ ShopSmart is an online shopping application built with React and TypeScript, uti
 
 ## Demo
 
-- Live Site: [ShopMart](https://dapurku.site/).
+- Live Site: [ShopMart](https://shopsmart-landing.netlify.app/).
 
 ## Future Improvements
 
