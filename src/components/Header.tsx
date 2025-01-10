@@ -7,26 +7,34 @@ const Header = () => {
   const { cartItems } = useCart();
 
   return (
-    <header className="bg-blue-600 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">ShopSmart</Link>
-        <nav>
-          <ul className="flex space-x-4">
-            <li><Link to="/products">Products</Link></li>
-            <li><Link to="/cart">Cart ({cartItems.length})</Link></li>
+    <header className="header">
+      <div className="container">
+        <div className="header-content">
+          <Link to="/" className="logo">
+            ShopSmart
+          </Link>
+          
+          <nav className="nav">
+            <Link to="/products" className="nav-link">
+              Products
+            </Link>
+            <Link to="/cart" className="nav-link">
+              Cart ({cartItems.length})
+            </Link>
             {user ? (
               <>
-                <li>Welcome, {user.name}</li>
-                <li><button onClick={logout}>Logout</button></li>
+                <span className="nav-link">{user.name}</span>
+                <button onClick={logout} className="button button-primary">
+                  Logout
+                </button>
               </>
             ) : (
-              <>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
-              </>
+              <Link to="/login" className="button button-primary">
+                Login
+              </Link>
             )}
-          </ul>
-        </nav>
+          </nav>
+        </div>
       </div>
     </header>
   );

@@ -6,59 +6,57 @@ const Cart = () => {
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="container mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Shopping Cart</h2>
+    <div className="container">
+      <h2 className="text-center mt-4">Shopping Cart</h2>
+      
       {cartItems.length === 0 ? (
-        <p>Your cart is empty</p>
+        <p className="text-center mt-4">Your cart is empty</p>
       ) : (
-        <>
+        <div>
           {cartItems.map(item => (
-            <div key={item.id} className="flex items-center justify-between border-b py-4">
+            <div key={item.id} className="cart-item">
               <div>
-                <h3 className="font-bold">{item.title}</h3>
-                <p>Price: ${item.price}</p>
+                <h3>{item.title}</h3>
+                <p className="product-price">${item.price}</p>
               </div>
-              <div className="flex items-center">
-                <button
+              <div>
+                <button 
                   onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                  className="bg-gray-200 px-2 py-1 rounded"
+                  className="button"
+                  disabled={item.quantity <= 1}
                 >
                   -
                 </button>
                 <span className="mx-2">{item.quantity}</span>
-                <button
+                <button 
                   onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                  className="bg-gray-200 px-2 py-1 rounded"
+                  className="button"
                 >
                   +
                 </button>
-                <button
+                <button 
                   onClick={() => removeFromCart(item.id)}
-                  className="ml-4 text-red-500"
+                  className="button"
                 >
                   Remove
                 </button>
               </div>
             </div>
           ))}
-          <div className="mt-4">
-            <h3 className="text-xl font-bold">Total: ${total.toFixed(2)}</h3>
+          
+          <div className="cart-total">
+            Total: ${total.toFixed(2)}
           </div>
-          <div className="mt-4 space-x-4">
-            <button
+          
+          <div className="text-center mt-4">
+            <button 
               onClick={clearCart}
-              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+              className="button button-primary"
             >
               Clear Cart
             </button>
-            <button
-              onClick={() => {/* TODO: Implement checkout functionality */}}
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors"
-            >
-              Checkout
-            </button>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
