@@ -4,17 +4,20 @@ import axios from 'axios';
 import { Product } from '../types';
 import { useProductFilter } from '../hooks/useProductFilter';
 
+// Fungsi untuk fetch data produk
 const fetchProducts = async (): Promise<Product[]> => {
   const response = await axios.get('https://api.escuelajs.co/api/v1/products');
   return response.data;
 };
 
 const ProductList = () => {
+  // Menggunakan React Query untuk fetch data produk
   const { data: products, isLoading, error } = useQuery<Product[]>({
     queryKey: ['products'],
     queryFn: fetchProducts
   });
 
+  // Menggunakan custom hook untuk filter produk
   const {
     categories,
     selectedCategory,
@@ -24,12 +27,14 @@ const ProductList = () => {
     handleSearchChange
   } = useProductFilter(products);
 
+  // Menampilkan loading state
   if (isLoading) return (
     <div className="container text-center mt-4">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
     </div>
   );
 
+  // Menampilkan error state
   if (error) return (
     <div className="container text-center mt-4 text-red-500">
       Error fetching products
@@ -41,6 +46,7 @@ const ProductList = () => {
       <div className="mt-4 space-y-4">
         <h2 className="text-2xl font-bold text-center">Our Products</h2>
         
+        {/* Input pencarian dan dropdown kategori */}
         <div className="flex flex-col sm:flex-row gap-4">
           <input
             type="text"
@@ -64,6 +70,7 @@ const ProductList = () => {
           </select>
         </div>
 
+        {/* Menampilkan produk yang telah difilter */}
         {filteredProducts.length === 0 ? (
           <p className="text-center text-gray-500 mt-8">
             No products found matching your criteria

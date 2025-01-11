@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { useFormValidation } from '../hooks/useFormValidation';
 
+// Aturan validasi untuk form login
 const validationRules = {
   email: (value: string) => {
     if (!value) return 'Email is required';
@@ -20,6 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   
+  // Menggunakan custom hook untuk validasi form
   const {
     values,
     errors,
@@ -32,6 +34,7 @@ const Login = () => {
     validationRules
   );
 
+  // Handler submit form
   const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;

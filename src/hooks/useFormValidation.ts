@@ -1,15 +1,22 @@
 import { useState, useCallback } from 'react';
 import { FormErrors } from '../types';
 
+// Interface untuk aturan validasi
 interface ValidationRules {
   [key: string]: (value: string) => string | undefined;
 }
 
-export const useFormValidation = (initialValues: { [key: string]: string }, validationRules: ValidationRules) => {
+// Custom hook untuk validasi form
+export const useFormValidation = (
+  initialValues: { [key: string]: string }, // Nilai awal form
+  validationRules: ValidationRules // Aturan validasi
+) => {
+  // State untuk nilai form, error, dan status submit
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Fungsi untuk memvalidasi satu field
   const validateField = useCallback((name: string, value: string) => {
     if (validationRules[name]) {
       const error = validationRules[name](value);
@@ -22,6 +29,7 @@ export const useFormValidation = (initialValues: { [key: string]: string }, vali
     return true;
   }, [validationRules]);
 
+  // Handler untuk perubahan input
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues(prev => ({
@@ -31,6 +39,7 @@ export const useFormValidation = (initialValues: { [key: string]: string }, vali
     validateField(name, value);
   }, [validateField]);
 
+  // Validasi seluruh form
   const validateForm = useCallback(() => {
     let isValid = true;
     const newErrors: FormErrors = {};
@@ -49,6 +58,7 @@ export const useFormValidation = (initialValues: { [key: string]: string }, vali
     return isValid;
   }, [values, validationRules]);
 
+  // Mengembalikan nilai dan fungsi yang diperlukan
   return {
     values,
     errors,
